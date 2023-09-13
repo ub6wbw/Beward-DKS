@@ -185,6 +185,17 @@ logging.basicConfig(level=logging.INFO)
 bot = Bot(token=BOT_TOKEN)
 dp = Dispatcher(bot)
 
+##"/autocollecton" command handler (automatic key collection - enabled)
+##обработчик команды "/autocollecton" (автосбор ключей - включён)
+@dp.message_handler(commands=['autocollecton'])
+async def send_autocollecton(message: types.Message):
+    if message.from_user.id in door_users.values():
+        AutoCollectKeys(IPTest, 'admin', PSWTest, 'on')
+        await message.reply('Автосбор ключей - включён !')
+        print('\n' + 'Автосбор ключей - включён !' + '\n')
+    else:
+        await message.reply('Неавторизованный пользователь.'+'\n'+\
+                            'Пройдите регистрацию !'+'\n')
 
 ##"/changedoorcode" command handler (change of door opening code)
 ##обработчик команды "/changedoorcode" (смена кода открытия двери)
