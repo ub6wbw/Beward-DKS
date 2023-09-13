@@ -282,6 +282,7 @@ async def send_open(message: types.Message):
         await message.reply('Неавторизованный пользователь.'+'\n'+\
                             'Пройдите регистрацию !'+'\n')
 
+##"/scancodeoff" command handler (deactivate key scan code)
 ##обработчик команды "/scancodeoff" (деактивировать код сканирования ключей)
 @dp.message_handler(commands=['scancodeoff'])
 async def send_scancodeoff(message: types.Message):
@@ -293,6 +294,7 @@ async def send_scancodeoff(message: types.Message):
         await message.reply('Неавторизованный пользователь.'+'\n'+\
                             'Пройдите регистрацию !'+'\n')
 
+##"/scancodeon" command handler (activate key scan code)
 ##обработчик команды "/scancodeon" (активировать код сканирования ключей)
 @dp.message_handler(commands=['scancodeon'])
 async def send_scancodeon(message: types.Message):
