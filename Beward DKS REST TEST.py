@@ -197,6 +197,18 @@ async def send_autocollecton(message: types.Message):
         await message.reply('Неавторизованный пользователь.'+'\n'+\
                             'Пройдите регистрацию !'+'\n')
 
+##"/autocollectoff" command handler (automatic key collection - disabled)
+##обработчик команды "/autocollectoff" (автосбор ключей - включён)
+@dp.message_handler(commands=['autocollectoff'])
+async def send_autocollectoff(message: types.Message):
+    if message.from_user.id in door_users.values():
+        AutoCollectKeys(IPTest, 'admin', PSWTest, 'off')
+        await message.reply('Автосбор ключей - отключён !')
+        print('\n' + 'Автосбор ключей - отключён !' + '\n')
+    else:
+        await message.reply('Неавторизованный пользователь.'+'\n'+\
+                            'Пройдите регистрацию !'+'\n')
+
 ##"/changedoorcode" command handler (change of door opening code)
 ##обработчик команды "/changedoorcode" (смена кода открытия двери)
 @dp.message_handler(commands=['changedoorcode'])
