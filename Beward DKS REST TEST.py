@@ -220,6 +220,18 @@ async def send_changedoorcode(message: types.Message):
         await message.reply('Неавторизованный пользователь.'+'\n'+\
                             'Пройдите регистрацию !'+'\n')
 
+##"/changescancode" command handler (change of door opening code)
+##обработчик команды "/changescancode" (смена кода открытия двери)
+@dp.message_handler(commands=['changescancode'])
+async def send_changescancode(message: types.Message):
+    if message.from_user.id in door_users.values():
+        SetNewScanCode(IPTest, 'admin', PSWTest)
+        await message.reply('Новый код сканирования ключей - ' + GetScanCode(IPTest, 'admin', PSWTest)[1])
+        print('\n' + 'Новый код сканирования ключей - ' + GetScanCode(IPTest, 'admin', PSWTest)[1] + '\n')
+    else:
+        await message.reply('Неавторизованный пользователь.'+'\n'+\
+                            'Пройдите регистрацию !'+'\n')
+
 ##"/doorcodeoff" command handler (deactivate the door opening code)
 ##обработчик команды "/doorcodeoff" (деактивировать код открытия двери)
 @dp.message_handler(commands=['doorcodeoff'])
