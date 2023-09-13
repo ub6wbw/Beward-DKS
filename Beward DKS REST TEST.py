@@ -282,6 +282,28 @@ async def send_open(message: types.Message):
         await message.reply('Неавторизованный пользователь.'+'\n'+\
                             'Пройдите регистрацию !'+'\n')
 
+##обработчик команды "/scancodeoff" (деактивировать код сканирования ключей)
+@dp.message_handler(commands=['scancodeoff'])
+async def send_scancodeoff(message: types.Message):
+    if message.from_user.id in door_users.values():
+        ScanCodeOff(IPTest, 'admin', PSWTest)
+        await message.reply('Деактивирован код сканирования ключей !')
+        print('\n' + 'Деактивирован код сканирования ключей !' + '\n')
+    else:
+        await message.reply('Неавторизованный пользователь.'+'\n'+\
+                            'Пройдите регистрацию !'+'\n')
+
+##обработчик команды "/scancodeon" (активировать код сканирования ключей)
+@dp.message_handler(commands=['scancodeon'])
+async def send_scancodeon(message: types.Message):
+    if message.from_user.id in door_users.values():
+        ScanCodeOn(IPTest, 'admin', PSWTest)
+        await message.reply('Активирован код сканирования ключей !')
+        print('\n' + 'Активирован код сканирования ключей !' + '\n')
+    else:
+        await message.reply('Неавторизованный пользователь.'+'\n'+\
+                            'Пройдите регистрацию !'+'\n')
+
 ##"/stdpass" command handler (setting the standard door code)
 ##обработчик команды "/stdpass" (установка стандартного кода двери)
 @dp.message_handler(commands=['stdpass'])
