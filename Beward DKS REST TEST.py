@@ -105,6 +105,19 @@ def GetDoorCode(IntercomIP, name, pswd):
     else:
         return False
 
+#find out the current key scan code
+#узнать текущий код сканирования ключей
+def GetScanCode(IntercomIP, name, pswd):
+    r = requests.post('http://' + IntercomIP + '/cgi-bin/rfid_cgi?action=get',\
+                      auth=HTTPDigestAuth(name, pswd),\
+                      data = {'flag':'4600', 'paramchannel':'0',\
+                              'paramcmd':'0', 'paramctrl':'1',\
+                              'paramstep':'0', 'paramreserved':'0'})
+    if r.status_code == 200:
+        return True, r.text[r.text.find('RegCode')+len('RegCode')+1:r.text.find('RegCode')+len('RegCode')+6]
+    else:
+        return False
+
 #deactivate the key scan code
 #деактивация кода сканирования ключей
 def ScanCodeOff(IntercomIP, name, pswd):
