@@ -26,6 +26,19 @@ door_users = {
 IPTest = 'A.B.C.D'
 PSWTest = 'your_password'
 
+#automatic key collection
+#автосбор ключей
+def AutoCollectKeys(IntercomIP, name, pswd, onoff):
+    r = requests.post('http://' + IntercomIP + '/cgi-bin/rfid_cgi?action=set&AutoCollectKeys=' + onoff,\
+                      auth=HTTPDigestAuth(name, pswd),\
+                      data = {'flag':'4600', 'paramchannel':'0',\
+                              'paramcmd':'0', 'paramctrl':'1',\
+                              'paramstep':'0', 'paramreserved':'0'})
+    if r.status_code == 200:
+        return True
+    else:
+        return False
+
 #deactivate the door open code
 #деактивация кода открытия двери
 def DoorCodeOff(IntercomIP, name, pswd):
